@@ -1,70 +1,44 @@
-# Getting Started with Create React App
+# Pagination React
+Fetches data from a Django REST API and shows data given a default [Page Number Pagination](https://www.django-rest-framework.org/api-guide/pagination/#pagenumberpagination).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Final Result
+Using React Strap and the help of a [gist](https://gist.github.com/kottenator/9d936eb3e4e3c3e02598) I implemented something of a [Google Pagination](https://developers.google.com/search/docs/advanced/ecommerce/pagination-and-incremental-page-loading).
 
-## Available Scripts
+![image](https://user-images.githubusercontent.com/47287096/180448615-9241fe8c-cb4d-4b23-aab8-978fcc2da5c5.png)
 
-In the project directory, you can run:
+## Page Number Pagination JSON Format
+A common pattern in pagination is the following, with the total number of records and the link for the next and previous page.
+```json
+// GET http://localhost:8000/books/?page=1
+{
+    "count": 12,
+    "next": "http://localhost:8000/books/?page=4",
+    "previous": "http://localhost:8000/books/?page=2",
+    "results": [
+        {
+            "id_book": 5,
+            "title": "Livro 5",
+            "author": "Autor 5",
+            "release_year": 2005,
+            "pages": 105
+        },
+        {
+            "id_book": 6,
+            "title": "Livro 6",
+            "author": "Autor 6",
+            "release_year": 2006,
+            "pages": 106
+        }
+    ]
+}
+```
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Pagination Component Usage
+Even though it is given the previous and the next route, for this component, you just need to give the current page number, last page number and a function that triggers the fetch of a given page. 
+```js
+<PaginationComponent
+  current={state.page.current}
+  last={state.pagination.last}
+  gotoPage={handleGotoPage}
+/>
+```
