@@ -37,8 +37,8 @@ A common pattern in pagination is the following, with the total number of record
 Even though it is given the previous and the next route, for this component, you just need to give the current page number, last page number and a function that triggers the fetch of a given page. 
 ```js
 <PaginationComponent
-  current={state.page.current}
-  last={state.pagination.last}
+  current={currentPage}
+  last={lastPage}
   gotoPage={handleGotoPage}
 />
 ```
