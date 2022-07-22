@@ -9,7 +9,7 @@ Using React Strap and the help of a [gist](https://gist.github.com/kottenator/9d
 ## Page Number Pagination JSON Format
 A common pattern in pagination is the following, with the total number of records and the link for the next and previous page.
 ```json
-// GET http://localhost:8000/books/?page=1
+// GET http://localhost:8000/books/?page=3
 {
     "count": 12,
     "next": "http://localhost:8000/books/?page=4",
