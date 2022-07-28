@@ -19,7 +19,7 @@ function Books() {
 
         state.pagination = {
             current: state?.pagination?.current ?? 1,
-            last: Math.ceil(count / 2)
+            last: Math.ceil(count / 2),
         }
         
         setState(state)
@@ -28,7 +28,8 @@ function Books() {
 
     function handleGotoPage(page) {
         state.pagination.current = page
-        setData(`/books/?page=${page}`)
+        const offset = page * 2 - 2
+        setData(`/books/?limit=2&offset=${offset}`)
     }
     
     return (
