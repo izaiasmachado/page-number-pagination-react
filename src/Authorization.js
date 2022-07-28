@@ -24,9 +24,9 @@ export default (allowedRoles) => {
                 setData()
             }, [])
             
-            const { isLoggedIn, user} = state
+            const { isLoggedIn, user } = state
             const role = user?.role
-            const userCanSeeWrappedComponent = isLoggedIn && allowedRoles.includes(role)
+            const userCanSeeWrappedComponent = allowedRoles.includes(role)
             
             if (!isLoggedIn) {
                 return <div>Redirect to login page</div>
