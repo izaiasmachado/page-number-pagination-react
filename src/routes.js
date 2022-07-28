@@ -9,10 +9,10 @@ function AppRoutes() {
   const Manager = Authorization(['manager', 'admin']);
   const User = Authorization(['user', 'manager', 'admin']);
 
-  const AdminComponent = <div>Admin</div>
-  const ManagerComponent = <div>Manager</div>
-  const UserComponent = <div>User</div>
-  const LoginComponent = <div>Login</div>
+  const AdminComponent = () => <div>Admin</div>
+  const ManagerComponent = () => <div>Manager</div>
+  const UserComponent = () => <div>User</div>
+  const LoginComponent = () => <div>Login</div>
 
   const AdminPage = Admin(AdminComponent)
   const ManagerPage = Manager(ManagerComponent)
@@ -22,6 +22,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/login" element={<LoginComponent/>} />
       <Route path="/books" element={<Books/>} />
+
       <Route path="/admin" element={<AdminPage/>} />
       <Route path="/manager" element={<ManagerPage/>} />
       <Route path="/user" element={<UserPage/>}/>

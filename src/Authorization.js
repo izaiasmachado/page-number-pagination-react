@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 export default (allowedRoles) => {
     return (WrappedComponent) => {
-        return function WithAuthorization() {
+        return function WithAuthorization(props) {
             const [state, setState] = useState({
                 isLoggedIn: false,
                 user: null,
@@ -25,18 +25,19 @@ export default (allowedRoles) => {
             }, [])
             
             const { isLoggedIn, user } = state
-            const role = user?.role
-            const userCanSeeWrappedComponent = allowedRoles.includes(role)
             
             if (!isLoggedIn) {
                 return <div>Redirect to login page</div>
             }
-        
-            if (!userCanSeeWrappedComponent) {
+            
+            const role = user?.role
+            const hasAuthorizedRole = allowedRoles.includes(role)
+            
+            if (!hasAuthorizedRole) {
                 return <div>Error 403</div>
             }
             
-            return WrappedComponent
+            return <WrappedComponent {...props} />
         }
     }
 }
